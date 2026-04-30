@@ -5,8 +5,6 @@
 
 Higgsfield CLI is a command-line tool for the [Higgsfield AI](https://higgsfield.ai) platform. Generate images and videos with 35+ models (Nano Banana, Soul, Veo, Kling, Seedance, Flux), train Soul Characters, and produce branded marketing assets — all from your terminal.
 
-**Learn more in the [docs](https://higgsfield.ai/docs).**
-
 <img src="./demo.png" />
 
 ## Get started
@@ -47,10 +45,6 @@ The CLI is also available as `higgs` and `hf` (when not in conflict with other t
 - **Workspace** — switch between team workspaces, see balance and history
 
 Run `higgsfield` for the full list, or `higgsfield <command> --help` for any subcommand.
-
-## Skills for AI agents
-
-Higgsfield ships [skills](https://github.com/higgsfield-ai/skills) for Claude Code, Cursor, Codex, and other agents that load Markdown-based skills. Tell your agent "generate an image of …" and it will use this CLI under the hood.
 
 ## Updating
 
