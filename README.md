@@ -34,6 +34,14 @@ Higgsfield CLI is a command-line tool for the [Higgsfield AI](https://higgsfield
     higgsfield generate create nano_banana_2 --prompt "a fox in a snowy pine forest"
     ```
 
+    Pass a local image as reference — CLI auto-uploads:
+    ```bash
+    higgsfield generate create nano_banana_2 --prompt "stylize as anime" --image ./photo.png
+    higgsfield generate create kling3_0 --prompt "slow push-in" --start-image ./first.png --end-image ./last.png
+    ```
+
+    Media flags (`--image`, `--start-image`, `--end-image`, `--video`, `--audio`) accept either a UUID (upload id or previous job id) or a local file path.
+
 The CLI is also available as `higgs` and `hf` (when not in conflict with other tools).
 
 ## What it does
