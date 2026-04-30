@@ -1,19 +1,22 @@
 #!/bin/sh
-# hf installer.
+# Higgsfield CLI installer.
+#
+# Installs `higgsfield` (primary) + `higgs` symlink (always).
+# Tries to install `hf` shortcut unless taken (e.g. by huggingface CLI).
 #
 # Usage:
-#   gh api -H "Accept: application/vnd.github.v3.raw" \
-#     /repos/higgsfield-ai/cli/contents/install.sh | sh
-#
-#   ./install.sh                       # /usr/local/bin (sudo if needed)
-#   ./install.sh --prefix=$HOME/.local
-#   ./install.sh --tag v0.1.1          # specific tag (default: latest)
+#   curl -fsSL https://raw.githubusercontent.com/higgsfield-ai/cli/main/install.sh | sh
+#   curl -fsSL ... | sh -s -- --prefix=$HOME/.local
+#   curl -fsSL ... | sh -s -- --tag v0.1.1
+#   curl -fsSL ... | sh -s -- --no-hf            # skip hf shortcut
+#   curl -fsSL ... | sh -s -- --hf               # force hf shortcut
 
 set -e
 
 REPO="higgsfield-ai/cli"
 PREFIX="/usr/local"
 TAG=""
+INSTALL_HF=auto
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
@@ -21,6 +24,8 @@ while [ "$#" -gt 0 ]; do
     --prefix)   PREFIX="$2"; shift 2 ;;
     --tag=*)    TAG="${1#*=}"; shift ;;
     --tag)      TAG="$2"; shift 2 ;;
+    --no-hf)    INSTALL_HF=no; shift ;;
+    --hf)       INSTALL_HF=yes; shift ;;
     *) echo "Unknown arg: $1" >&2; exit 1 ;;
   esac
 done
@@ -51,7 +56,7 @@ else
   if [ -z "$TAG" ]; then
     TAG="$(curl -fsSL "https://api.github.com/repos/$REPO/releases/latest" | sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p' | head -n 1)"
     if [ -z "$TAG" ]; then
-      echo "Failed to determine latest release. If repo is private, install gh: brew install gh && gh auth login" >&2
+      echo "Failed to determine latest release." >&2
       exit 1
     fi
   fi
@@ -74,15 +79,43 @@ if [ ! -d "$BIN_DIR" ]; then
   mkdir -p "$BIN_DIR" 2>/dev/null || sudo mkdir -p "$BIN_DIR"
 fi
 
-if [ -w "$BIN_DIR" ]; then
-  install -m 0755 "$TMPDIR/hf" "$BIN_DIR/hf"
-  ln -sf "$BIN_DIR/hf" "$BIN_DIR/higgsfield"
-  [ "$OS" = "darwin" ] && xattr -d com.apple.quarantine "$BIN_DIR/hf" 2>/dev/null || true
+run() {
+  if [ -w "$BIN_DIR" ]; then "$@"; else sudo "$@"; fi
+}
+
+# Primary binary: higgsfield
+run install -m 0755 "$TMPDIR/hf" "$BIN_DIR/higgsfield"
+[ "$OS" = "darwin" ] && run xattr -d com.apple.quarantine "$BIN_DIR/higgsfield" 2>/dev/null || true
+
+# higgs symlink (always)
+run ln -sf "$BIN_DIR/higgsfield" "$BIN_DIR/higgs"
+
+# hf shortcut (optional)
+HF_INSTALLED=no
+if [ "$INSTALL_HF" = "no" ]; then
+  echo "Skipping 'hf' shortcut (--no-hf)."
+elif [ "$INSTALL_HF" = "yes" ]; then
+  run ln -sf "$BIN_DIR/higgsfield" "$BIN_DIR/hf"
+  HF_INSTALLED=yes
 else
-  sudo install -m 0755 "$TMPDIR/hf" "$BIN_DIR/hf"
-  sudo ln -sf "$BIN_DIR/hf" "$BIN_DIR/higgsfield"
-  [ "$OS" = "darwin" ] && sudo xattr -d com.apple.quarantine "$BIN_DIR/hf" 2>/dev/null || true
+  if command -v hf >/dev/null 2>&1; then
+    EXISTING="$(command -v hf)"
+    if [ "$EXISTING" = "$BIN_DIR/hf" ]; then
+      run ln -sf "$BIN_DIR/higgsfield" "$BIN_DIR/hf"
+      HF_INSTALLED=yes
+    else
+      echo "Skipping 'hf' shortcut: $EXISTING already in PATH (huggingface or other tool)."
+      echo "Force with --hf if you want to override."
+    fi
+  else
+    run ln -sf "$BIN_DIR/higgsfield" "$BIN_DIR/hf"
+    HF_INSTALLED=yes
+  fi
 fi
 
-echo "Installed: $($BIN_DIR/hf version)"
-echo "Binary: $BIN_DIR/hf  (also linked as 'higgsfield')"
+echo "Installed: $($BIN_DIR/higgsfield version)"
+if [ "$HF_INSTALLED" = "yes" ]; then
+  echo "Bins: higgsfield, higgs, hf"
+else
+  echo "Bins: higgsfield, higgs"
+fi
