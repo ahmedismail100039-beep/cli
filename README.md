@@ -33,7 +33,7 @@ Higgsfield CLI is a command-line tool for the [Higgsfield AI](https://higgsfield
 
 3. Generate something:
     ```bash
-    higgsfield generate create z_image --prompt "a fox in a snowy pine forest"
+    higgsfield generate create nano_banana_2 --prompt "a fox in a snowy pine forest"
     ```
 
 The CLI is also available as `higgs` and `hf` (when not in conflict with other tools).
