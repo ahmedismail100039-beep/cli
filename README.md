@@ -60,8 +60,6 @@ Generate an image and wait for the result URL:
 higgsfield generate create nano_banana_2 --prompt "a fox in a snowy pine forest" --wait
 ```
 
-Media flags (`--image`, `--start-image`, `--end-image`, `--video`, `--audio`) accept a UUID (upload id or previous job id) or a local file path.
-
 ## Examples
 
 ### Nano Banana Pro
@@ -125,51 +123,53 @@ higgsfield generate create text2image_soul_v2 \
 
 ## Models
 
-34 image and video models. The list below is grouped; use `higgsfield model list` for the live catalog and `higgsfield model get <job_set_type>` for the full parameter schema (required fields, defaults, enums).
+34 image and video models. Use `higgsfield model list` for the live catalog and `higgsfield model get <job_set_type>` for the full parameter schema (required fields, defaults, enums).
+
+The `inputs` column lists the media flags each model accepts. Every flag takes either a UUID (upload id or previous job id) or a local file path; paths are auto-uploaded.
 
 ### Image (18)
 
-| job_set_type | name |
-|---|---|
-| `nano_banana_2` | Nano Banana Pro |
-| `nano_banana_flash` | Nano Banana 2 |
-| `nano_banana` | Nano Banana |
-| `flux_2` | FLUX.2 |
-| `flux_kontext` | Flux Kontext |
-| `gpt_image_2` | GPT Image 2 |
-| `text2image_soul_v2` | Higgsfield Soul V2 |
-| `seedream_v4_5` | Seedream 4.5 |
-| `seedream_v5_lite` | Seedream V5 Lite |
-| `grok_image` | Grok Image |
-| `openai_hazel` | OpenAI Hazel |
-| `image_auto` | Image Auto |
-| `z_image` | Z Image |
-| `kling_omni_image` | Kling O1 Image |
-| `cinematic_studio_2_5` | Cinematic Studio 2.5 |
-| `soul_cinematic` | Soul Cinematic |
-| `soul_location` | Soul Location |
-| `marketing_studio_image` | Marketing Studio Image |
+| job_set_type | name | inputs |
+|---|---|---|
+| `nano_banana_2` | Nano Banana Pro | `--image` (1+) |
+| `nano_banana_flash` | Nano Banana 2 | `--image` (1+) |
+| `nano_banana` | Nano Banana | `--image` (1+) |
+| `flux_2` | FLUX.2 | `--image` (1+) |
+| `flux_kontext` | Flux Kontext | `--image` (1+) |
+| `gpt_image_2` | GPT Image 2 | `--image` (1+) |
+| `text2image_soul_v2` | Higgsfield Soul V2 | `--image` (1+), `--soul-id` |
+| `seedream_v4_5` | Seedream 4.5 | `--image` (1+) |
+| `seedream_v5_lite` | Seedream V5 Lite | `--image` (1+) |
+| `grok_image` | Grok Image | `--image` (1+) |
+| `openai_hazel` | OpenAI Hazel | `--image` (1+) |
+| `image_auto` | Image Auto | `--image` (1+) |
+| `z_image` | Z Image | text-only |
+| `kling_omni_image` | Kling O1 Image | `--image` (1+) |
+| `cinematic_studio_2_5` | Cinematic Studio 2.5 | `--image` (1+) |
+| `soul_cinematic` | Soul Cinematic | `--image` (1+) |
+| `soul_location` | Soul Location | text-only |
+| `marketing_studio_image` | Marketing Studio Image | `--image` (1+) |
 
 ### Video (16)
 
-| job_set_type | name |
-|---|---|
-| `veo3_1` | Google Veo 3.1 |
-| `veo3_1_lite` | Google Veo 3.1 Lite |
-| `veo3` | Google Veo 3 |
-| `kling3_0` | Kling v3.0 |
-| `kling2_6` | Kling 2.6 Video |
-| `seedance_2_0` | Seedance 2.0 |
-| `seedance1_5` | Seedance 1.5 Pro |
-| `wan2_7` | Wan 2.7 |
-| `wan2_6` | Wan 2.6 Video |
-| `minimax_hailuo` | Minimax Hailuo |
-| `grok_video` | Grok Video |
-| `cinematic_studio_3_0` | Cinematic Studio 3.0 |
-| `cinematic_studio_video` | Cinematic Studio Video |
-| `cinematic_studio_video_v2` | Cinematic Studio Video V2 |
-| `soul_cast` | Soul Cast |
-| `marketing_studio_video` | Marketing Studio Video |
+| job_set_type | name | inputs |
+|---|---|---|
+| `veo3_1` | Google Veo 3.1 | `--image` (optional) |
+| `veo3_1_lite` | Google Veo 3.1 Lite | `--start-image`, `--end-image` |
+| `veo3` | Google Veo 3 | `--image` (optional) |
+| `kling3_0` | Kling v3.0 | `--start-image`, `--end-image` |
+| `kling2_6` | Kling 2.6 Video | `--image` (optional) |
+| `seedance_2_0` | Seedance 2.0 | `--start-image`, `--end-image` |
+| `seedance1_5` | Seedance 1.5 Pro | `--start-image`, `--end-image` |
+| `wan2_7` | Wan 2.7 | `--start-image`, `--end-image` |
+| `wan2_6` | Wan 2.6 Video | `--start-image`, `--end-image` |
+| `minimax_hailuo` | Minimax Hailuo | `--image` (1+) |
+| `grok_video` | Grok Video | `--start-image`, `--end-image` |
+| `cinematic_studio_3_0` | Cinematic Studio 3.0 | `--start-image`, `--end-image` |
+| `cinematic_studio_video` | Cinematic Studio Video | `--start-image`, `--end-image` |
+| `cinematic_studio_video_v2` | Cinematic Studio Video V2 | `--start-image`, `--end-image` |
+| `soul_cast` | Soul Cast | text-only |
+| `marketing_studio_video` | Marketing Studio Video | avatars, products — see `model get` |
 
 Per-model parameters, defaults, and enums: `higgsfield model get <job_set_type>`.
 
