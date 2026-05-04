@@ -208,14 +208,6 @@ Example pipeline:
 higgsfield generate list --json | jq -r '.[] | select(.status=="completed") | .result_url'
 ```
 
-### Environment variables
-
-| Variable | Purpose |
-|---|---|
-| `HIGGSFIELD_API_URL` | API endpoint (default: production) |
-| `HIGGSFIELD_DEVICE_AUTH_URL` | Device-flow auth endpoint |
-| `HIGGSFIELD_CREDENTIALS_PATH` | Token file path (default `~/.config/higgsfield/credentials.json`) |
-
 ## Updating
 
 ```bash
@@ -250,27 +242,15 @@ brew uninstall higgsfield
 npm uninstall -g @higgsfield/cli
 ```
 
-Remove stored credentials:
-
-```bash
-rm -rf ~/.config/higgsfield
-```
-
 ## Troubleshooting
 
 **`Session expired` / `Not authenticated`** — tokens are short-lived. Re-run `higgsfield auth login`.
-
-**Behind a corporate proxy** — set `HTTPS_PROXY` / `HTTP_PROXY` and re-run.
-
-**Where is the token stored?** — `~/.config/higgsfield/credentials.json` (mode `600`). Override with `HIGGSFIELD_CREDENTIALS_PATH`.
 
 **`Unknown model "<name>"`** — run `higgsfield model list` for the current catalog; model names occasionally change.
 
 ## Support
 
 Bugs and feature requests: [github.com/higgsfield-ai/cli/issues](https://github.com/higgsfield-ai/cli/issues). Please include `higgsfield version` output and the exact command that failed.
-
-Platform: [higgsfield.ai](https://higgsfield.ai)
 
 ## License
 
