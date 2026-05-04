@@ -46,12 +46,6 @@ npm install -g @higgsfield/cli
 
 Download an archive matching your OS and architecture from [Releases](https://github.com/higgsfield-ai/cli/releases), extract, and place the binary in your `$PATH`.
 
-After install, the CLI is available as three names:
-
-- `higgsfield`
-- `higgs`
-- `hf`
-
 ## Quickstart
 
 Authenticate:
@@ -213,10 +207,10 @@ Per-model parameters, defaults, and enums: `higgsfield model get <job_set_type>`
 | `higgsfield account` | credits balance, transactions |
 | `higgsfield workspace` | list / select / unset billing workspace |
 | `higgsfield model` | list models, inspect parameter schema |
-| `higgsfield generate` (alias `gen`) | create / cost / wait / get / list jobs |
+| `higgsfield generate` | create / cost / wait / get / list jobs |
 | `higgsfield upload` | upload an image / video / audio file |
 | `higgsfield soul` | train and manage Soul characters |
-| `higgsfield marketing-studio` (alias `ms`) | branded ads with avatars and products |
+| `higgsfield marketing-studio` | branded ads with avatars and products |
 | `higgsfield product-photoshoot` | brand image generation with mode-specific enhancement |
 | `higgsfield version` | print build info |
 
@@ -287,7 +281,7 @@ npm install -g @higgsfield/cli@0.1.22
 
 ```bash
 # curl install (default prefix /usr/local)
-sudo rm /usr/local/bin/higgsfield /usr/local/bin/higgs /usr/local/bin/hf
+sudo rm /usr/local/bin/higgsfield
 
 # brew
 brew uninstall higgsfield
@@ -305,12 +299,6 @@ rm -rf ~/.config/higgsfield
 ## Troubleshooting
 
 **`Session expired` / `Not authenticated`** — tokens are short-lived. Re-run `higgsfield auth login`.
-
-**`hf` collides with another tool** — use `higgsfield` or `higgs` instead, or reinstall via curl with `--no-hf`:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/higgsfield-ai/cli/main/install.sh | sh -s -- --no-hf
-```
 
 **Behind a corporate proxy** — set `HTTPS_PROXY` / `HTTP_PROXY` and re-run.
 
