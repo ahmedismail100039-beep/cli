@@ -123,16 +123,6 @@ higgsfield generate create text2image_soul_v2 \
   --wait
 ```
 
-### Branded ad image (Marketing Studio)
-
-```bash
-higgsfield generate create marketing_studio_image \
-  --prompt "product on marble countertop, soft daylight" \
-  --image ./product.png \
-  --resolution 4k \
-  --wait
-```
-
 ## Models
 
 34 image and video models. The list below is grouped; use `higgsfield model list` for the live catalog and `higgsfield model get <job_set_type>` for the full parameter schema (required fields, defaults, enums).
