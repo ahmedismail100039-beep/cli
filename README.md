@@ -48,9 +48,9 @@ Download an archive matching your OS and architecture from [Releases](https://gi
 
 After install, the CLI is available as three names:
 
-- `higgsfield` — canonical
-- `higgs` — short
-- `hf` — shortest (the curl `install.sh` skips it when another `hf` is already on `$PATH`; Homebrew and npm always install it)
+- `higgsfield`
+- `higgs`
+- `hf`
 
 ## Quickstart
 
