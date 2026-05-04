@@ -104,9 +104,9 @@ higgsfield generate create seedance_2_0 \
   --wait
 ```
 
-### Identity-faithful image (Soul V2)
+### Soul ID
 
-Train a Soul character once:
+Train a Soul ID once:
 
 ```bash
 higgsfield soul-id create --name me --soul-2 \
@@ -114,7 +114,7 @@ higgsfield soul-id create --name me --soul-2 \
 higgsfield soul-id wait <soul_id>
 ```
 
-Reuse the trained Soul in any compatible image model:
+Reuse it in any compatible image model:
 
 ```bash
 higgsfield generate create text2image_soul_v2 \
