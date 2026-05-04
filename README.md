@@ -54,25 +54,13 @@ Authenticate:
 higgsfield auth login
 ```
 
-Generate one image:
+Generate an image and wait for the result URL:
 
 ```bash
-higgsfield generate create nano_banana_2 --prompt "a fox in a snowy pine forest"
+higgsfield generate create nano_banana_2 --prompt "a fox in a snowy pine forest" --wait
 ```
 
-Block until the job finishes and print the result URL:
-
-```bash
-higgsfield generate create nano_banana_2 --prompt "..." --wait
-```
-
-Pass a local image as reference — the CLI auto-uploads it:
-
-```bash
-higgsfield generate create flux_kontext --prompt "stylize as anime" --image ./photo.png --wait
-```
-
-Media flags (`--image`, `--start-image`, `--end-image`, `--video`, `--audio`) accept either a UUID (an upload id or a previous job id) or a local file path.
+Media flags (`--image`, `--start-image`, `--end-image`, `--video`, `--audio`) accept a UUID (upload id or previous job id) or a local file path.
 
 ## Examples
 
