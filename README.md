@@ -57,7 +57,7 @@ higgsfield auth login
 Generate an image and wait for the result URL:
 
 ```bash
-higgsfield generate create nano_banana_2 --prompt "a fox in a snowy pine forest" --wait
+higgsfield generate create nano_banana_2 --prompt "a quiet beach at sunrise" --wait
 ```
 
 ## Examples
@@ -66,7 +66,7 @@ higgsfield generate create nano_banana_2 --prompt "a fox in a snowy pine forest"
 
 ```bash
 higgsfield generate create nano_banana_2 \
-  --prompt "studio product photo, soft window light" \
+  --prompt "modern architecture, glass facade, golden hour light" \
   --aspect_ratio 16:9 \
   --resolution 2k \
   --wait
@@ -76,7 +76,7 @@ higgsfield generate create nano_banana_2 \
 
 ```bash
 higgsfield generate create gpt_image_2 \
-  --prompt "minimal poster, bold typography, pastel palette" \
+  --prompt "clean infographic showing global energy mix, flat icons, muted palette" \
   --aspect_ratio 3:4 \
   --quality high --resolution 2k \
   --wait
@@ -86,7 +86,7 @@ higgsfield generate create gpt_image_2 \
 
 ```bash
 higgsfield generate create kling3_0 \
-  --prompt "slow push-in shot" \
+  --prompt "slow camera push through a forest clearing at dawn" \
   --start-image ./first.png \
   --duration 5 --mode pro \
   --wait
@@ -96,7 +96,7 @@ higgsfield generate create kling3_0 \
 
 ```bash
 higgsfield generate create seedance_2_0 \
-  --prompt "neon-lit street, rainy night, cinematic" \
+  --prompt "drone shot over a mountain valley at sunrise" \
   --aspect_ratio 16:9 --duration 5 \
   --resolution 1080p --mode std --genre noir \
   --wait
@@ -116,7 +116,7 @@ Reuse it in any compatible image model:
 
 ```bash
 higgsfield generate create text2image_soul_v2 \
-  --prompt "cinematic close-up portrait, golden hour" \
+  --prompt "professional portrait, neutral background, soft daylight" \
   --soul-id <soul_id> \
   --wait
 ```
