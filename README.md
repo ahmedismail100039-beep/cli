@@ -15,7 +15,7 @@ Generate images and videos from the terminal using 34 [Higgsfield AI](https://hi
 - [Examples](#examples)
 - [Models](#models)
 - [Commands](#commands)
-- [Scripting](#scripting)
+- [Flags](#flags)
 - [Updating](#updating)
 - [Uninstall](#uninstall)
 - [Troubleshooting](#troubleshooting)
@@ -190,32 +190,22 @@ Per-model parameters, defaults, and enums: `higgsfield model get <job_set_type>`
 
 Run `higgsfield <command> --help` for flags and examples (also `higgsfield generate create --help`, `higgsfield soul-id create --help`, etc.).
 
-## Scripting
+## Flags
 
-### JSON output
+Flags work across all commands.
 
-Every command accepts `--json` for machine-readable output (good for `jq` pipelines):
+| Flag | Purpose |
+|---|---|
+| `--wait` | block until the job finishes; print the result URL |
+| `--wait-timeout` | max wait duration (default `10m`) |
+| `--wait-interval` | poll interval (default `3s`) |
+| `--json` | machine-readable JSON output |
+| `--no-color` | disable color output |
+
+Example pipeline:
 
 ```bash
 higgsfield generate list --json | jq -r '.[] | select(.status=="completed") | .result_url'
-```
-
-### Block until done
-
-```bash
-higgsfield generate create kling3_0 --prompt "..." --start-image ./a.png --wait --json \
-  | jq -r '.[0].result_url'
-```
-
-Tunables: `--wait-timeout 20m` (default `10m`), `--wait-interval 5s` (default `3s`).
-
-### Shell completion
-
-```bash
-higgsfield completion zsh   > "${fpath[1]}/_higgsfield"
-higgsfield completion bash  > /etc/bash_completion.d/higgsfield
-higgsfield completion fish  > ~/.config/fish/completions/higgsfield.fish
-higgsfield completion powershell | Out-String | Invoke-Expression  # current session
 ```
 
 ### Environment variables
@@ -225,10 +215,6 @@ higgsfield completion powershell | Out-String | Invoke-Expression  # current ses
 | `HIGGSFIELD_API_URL` | API endpoint (default: production) |
 | `HIGGSFIELD_DEVICE_AUTH_URL` | Device-flow auth endpoint |
 | `HIGGSFIELD_CREDENTIALS_PATH` | Token file path (default `~/.config/higgsfield/credentials.json`) |
-
-### Exit codes
-
-`0` success · `1` generic · `2` auth · `3` API · `4` user input.
 
 ## Updating
 
