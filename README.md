@@ -64,7 +64,7 @@ Media flags (`--image`, `--start-image`, `--end-image`, `--video`, `--audio`) ac
 
 ## Examples
 
-### Text → image (Nano Banana Pro)
+### Nano Banana Pro
 
 ```bash
 higgsfield generate create nano_banana_2 \
@@ -74,16 +74,17 @@ higgsfield generate create nano_banana_2 \
   --wait
 ```
 
-### Image edit / restyle (Flux Kontext)
+### GPT Image 2
 
 ```bash
-higgsfield generate create flux_kontext \
-  --prompt "convert to watercolor" \
-  --image ./input.png \
+higgsfield generate create gpt_image_2 \
+  --prompt "minimal poster, bold typography, pastel palette" \
+  --aspect_ratio 3:4 \
+  --quality high --resolution 2k \
   --wait
 ```
 
-### Image → video (Kling v3.0)
+### Kling v3.0
 
 ```bash
 higgsfield generate create kling3_0 \
@@ -93,12 +94,13 @@ higgsfield generate create kling3_0 \
   --wait
 ```
 
-### Cinematic video (Google Veo 3.1)
+### Seedance 2.0
 
 ```bash
-higgsfield generate create veo3_1 \
-  --prompt "drone over a misty mountain valley at dawn" \
-  --aspect_ratio 16:9 --duration 8 --quality high \
+higgsfield generate create seedance_2_0 \
+  --prompt "neon-lit street, rainy night, cinematic" \
+  --aspect_ratio 16:9 --duration 5 \
+  --resolution 1080p --mode std --genre noir \
   --wait
 ```
 
