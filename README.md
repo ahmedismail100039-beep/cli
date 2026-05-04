@@ -4,7 +4,7 @@
 [![npm](https://img.shields.io/npm/v/@higgsfield/cli?style=flat-square)](https://www.npmjs.com/package/@higgsfield/cli)
 [![license](https://img.shields.io/github/license/higgsfield-ai/cli?style=flat-square)](./LICENSE)
 
-Generate images and videos from the terminal using 34 [Higgsfield AI](https://higgsfield.ai) models — Nano Banana Pro, FLUX.2, Soul V2, Veo 3.1, Kling v3.0, Seedance 2.0, Marketing Studio, and more. Train face-faithful Soul characters and produce branded marketing assets without leaving your shell.
+Generate images and videos from the terminal using 34+ [Higgsfield AI](https://higgsfield.ai) models — Nano Banana Pro, FLUX.2, Soul V2, Veo 3.1, Kling v3.0, Seedance 2.0, Marketing Studio, and more. Train face-faithful Soul characters and produce branded marketing assets without leaving your shell.
 
 ![Higgsfield CLI demo](./demo.png)
 
@@ -123,7 +123,7 @@ higgsfield generate create text2image_soul_v2 \
 
 ## Models
 
-34 image and video models. Per-model parameters, defaults, and enums: [MODELS.md](./MODELS.md). Live catalog: `higgsfield model list`.
+34+ image and video models. Per-model parameters, defaults, and enums: [MODELS.md](./MODELS.md). Live catalog: `higgsfield model list`.
 
 ### Image (18)
 
