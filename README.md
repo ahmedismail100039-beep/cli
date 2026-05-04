@@ -143,12 +143,6 @@ higgsfield generate create marketing_studio_image \
   --wait
 ```
 
-### Pipe a prompt from stdin
-
-```bash
-echo "a fox in a snowy pine forest" | higgsfield generate create nano_banana_2 --wait
-```
-
 ## Models
 
 34 image and video models. The list below is grouped; use `higgsfield model list` for the live catalog and `higgsfield model get <job_set_type>` for the full parameter schema (required fields, defaults, enums).
