@@ -54,7 +54,7 @@ After install, the CLI is available as three names:
 
 ## Quickstart
 
-Authenticate (opens browser, device-code flow):
+Authenticate:
 
 ```bash
 hf auth login
