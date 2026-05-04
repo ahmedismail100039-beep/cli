@@ -57,25 +57,25 @@ After install, the CLI is available as three names:
 Authenticate:
 
 ```bash
-hf auth login
+higgsfield auth login
 ```
 
 Generate one image:
 
 ```bash
-hf gen create nano_banana_2 --prompt "a fox in a snowy pine forest"
+higgsfield generate create nano_banana_2 --prompt "a fox in a snowy pine forest"
 ```
 
 Block until the job finishes and print the result URL:
 
 ```bash
-hf gen create nano_banana_2 --prompt "..." --wait
+higgsfield generate create nano_banana_2 --prompt "..." --wait
 ```
 
 Pass a local image as reference — the CLI auto-uploads it:
 
 ```bash
-hf gen create flux_kontext --prompt "stylize as anime" --image ./photo.png --wait
+higgsfield generate create flux_kontext --prompt "stylize as anime" --image ./photo.png --wait
 ```
 
 Media flags (`--image`, `--start-image`, `--end-image`, `--video`, `--audio`) accept either a UUID (an upload id or a previous job id) or a local file path.
@@ -85,7 +85,7 @@ Media flags (`--image`, `--start-image`, `--end-image`, `--video`, `--audio`) ac
 ### Text → image (Nano Banana Pro)
 
 ```bash
-hf gen create nano_banana_2 \
+higgsfield generate create nano_banana_2 \
   --prompt "studio product photo, soft window light" \
   --aspect_ratio 16:9 \
   --resolution 2k \
@@ -95,7 +95,7 @@ hf gen create nano_banana_2 \
 ### Image edit / restyle (Flux Kontext)
 
 ```bash
-hf gen create flux_kontext \
+higgsfield generate create flux_kontext \
   --prompt "convert to watercolor" \
   --image ./input.png \
   --wait
@@ -104,7 +104,7 @@ hf gen create flux_kontext \
 ### Image → video (Kling v3.0)
 
 ```bash
-hf gen create kling3_0 \
+higgsfield generate create kling3_0 \
   --prompt "slow push-in shot" \
   --start-image ./first.png \
   --duration 5 --mode pro \
@@ -114,7 +114,7 @@ hf gen create kling3_0 \
 ### Cinematic video (Google Veo 3.1)
 
 ```bash
-hf gen create veo3_1 \
+higgsfield generate create veo3_1 \
   --prompt "drone over a misty mountain valley at dawn" \
   --aspect_ratio 16:9 --duration 8 --quality high \
   --wait
@@ -125,15 +125,15 @@ hf gen create veo3_1 \
 Train a Soul character once:
 
 ```bash
-hf soul create --name me --soul-2 \
+higgsfield soul create --name me --soul-2 \
   --image ./me1.jpg --image ./me2.jpg --image ./me3.jpg
-hf soul wait <soul_id>
+higgsfield soul wait <soul_id>
 ```
 
 Reuse the trained Soul in any compatible image model:
 
 ```bash
-hf gen create text2image_soul_v2 \
+higgsfield generate create text2image_soul_v2 \
   --prompt "cinematic close-up portrait, golden hour" \
   --custom_reference_id <soul_id> \
   --wait
@@ -142,7 +142,7 @@ hf gen create text2image_soul_v2 \
 ### Branded ad image (Marketing Studio)
 
 ```bash
-hf gen create marketing_studio_image \
+higgsfield generate create marketing_studio_image \
   --prompt "product on marble countertop, soft daylight" \
   --image ./product.png \
   --resolution 4k \
@@ -152,12 +152,12 @@ hf gen create marketing_studio_image \
 ### Pipe a prompt from stdin
 
 ```bash
-echo "a fox in a snowy pine forest" | hf gen create nano_banana_2 --wait
+echo "a fox in a snowy pine forest" | higgsfield generate create nano_banana_2 --wait
 ```
 
 ## Models
 
-34 image and video models. The list below is grouped; use `hf model list` for the live catalog and `hf model get <job_set_type>` for the full parameter schema (required fields, defaults, enums).
+34 image and video models. The list below is grouped; use `higgsfield model list` for the live catalog and `higgsfield model get <job_set_type>` for the full parameter schema (required fields, defaults, enums).
 
 ### Image (18)
 
@@ -203,24 +203,24 @@ echo "a fox in a snowy pine forest" | hf gen create nano_banana_2 --wait
 | `soul_cast` | Soul Cast |
 | `marketing_studio_video` | Marketing Studio Video |
 
-Per-model parameters, defaults, and enums: `hf model get <job_set_type>`.
+Per-model parameters, defaults, and enums: `higgsfield model get <job_set_type>`.
 
 ## Commands
 
 | Command | Purpose |
 |---|---|
-| `hf auth` | login / logout / inspect token |
-| `hf account` | credits balance, transactions |
-| `hf workspace` | list / select / unset billing workspace |
-| `hf model` | list models, inspect parameter schema |
-| `hf gen` (alias `generate`) | create / cost / wait / get / list jobs |
-| `hf upload` | upload an image / video / audio file |
-| `hf soul` | train and manage Soul characters |
-| `hf marketing-studio` (alias `ms`) | branded ads with avatars and products |
-| `hf product-photoshoot` | brand image generation with mode-specific enhancement |
-| `hf version` | print build info |
+| `higgsfield auth` | login / logout / inspect token |
+| `higgsfield account` | credits balance, transactions |
+| `higgsfield workspace` | list / select / unset billing workspace |
+| `higgsfield model` | list models, inspect parameter schema |
+| `higgsfield generate` (alias `gen`) | create / cost / wait / get / list jobs |
+| `higgsfield upload` | upload an image / video / audio file |
+| `higgsfield soul` | train and manage Soul characters |
+| `higgsfield marketing-studio` (alias `ms`) | branded ads with avatars and products |
+| `higgsfield product-photoshoot` | brand image generation with mode-specific enhancement |
+| `higgsfield version` | print build info |
 
-Run `hf <command> --help` for flags and examples (also `hf gen create --help`, `hf soul create --help`, etc.).
+Run `higgsfield <command> --help` for flags and examples (also `higgsfield generate create --help`, `higgsfield soul create --help`, etc.).
 
 ## Scripting
 
@@ -229,13 +229,13 @@ Run `hf <command> --help` for flags and examples (also `hf gen create --help`, `
 Every command accepts `--json` for machine-readable output (good for `jq` pipelines):
 
 ```bash
-hf gen list --json | jq -r '.[] | select(.status=="completed") | .result_url'
+higgsfield generate list --json | jq -r '.[] | select(.status=="completed") | .result_url'
 ```
 
 ### Block until done
 
 ```bash
-hf gen create kling3_0 --prompt "..." --start-image ./a.png --wait --json \
+higgsfield generate create kling3_0 --prompt "..." --start-image ./a.png --wait --json \
   | jq -r '.[0].result_url'
 ```
 
@@ -244,10 +244,10 @@ Tunables: `--wait-timeout 20m` (default `10m`), `--wait-interval 5s` (default `3
 ### Shell completion
 
 ```bash
-hf completion zsh   > "${fpath[1]}/_hf"
-hf completion bash  > /etc/bash_completion.d/hf
-hf completion fish  > ~/.config/fish/completions/hf.fish
-hf completion powershell | Out-String | Invoke-Expression  # current session
+higgsfield completion zsh   > "${fpath[1]}/_higgsfield"
+higgsfield completion bash  > /etc/bash_completion.d/higgsfield
+higgsfield completion fish  > ~/.config/fish/completions/higgsfield.fish
+higgsfield completion powershell | Out-String | Invoke-Expression  # current session
 ```
 
 ### Environment variables
@@ -304,7 +304,7 @@ rm -rf ~/.config/higgsfield
 
 ## Troubleshooting
 
-**`Session expired` / `Not authenticated`** — tokens are short-lived. Re-run `hf auth login`.
+**`Session expired` / `Not authenticated`** — tokens are short-lived. Re-run `higgsfield auth login`.
 
 **`hf` collides with another tool** — use `higgsfield` or `higgs` instead, or reinstall via curl with `--no-hf`:
 
@@ -316,11 +316,11 @@ curl -fsSL https://raw.githubusercontent.com/higgsfield-ai/cli/main/install.sh |
 
 **Where is the token stored?** — `~/.config/higgsfield/credentials.json` (mode `600`). Override with `HIGGSFIELD_CREDENTIALS_PATH`.
 
-**`Unknown model "<name>"`** — run `hf model list` for the current catalog; model names occasionally change.
+**`Unknown model "<name>"`** — run `higgsfield model list` for the current catalog; model names occasionally change.
 
 ## Support
 
-Bugs and feature requests: [github.com/higgsfield-ai/cli/issues](https://github.com/higgsfield-ai/cli/issues). Please include `hf version` output and the exact command that failed.
+Bugs and feature requests: [github.com/higgsfield-ai/cli/issues](https://github.com/higgsfield-ai/cli/issues). Please include `higgsfield version` output and the exact command that failed.
 
 Platform: [higgsfield.ai](https://higgsfield.ai)
 
