@@ -50,7 +50,7 @@ After install, the CLI is available as three names:
 
 - `higgsfield` — canonical
 - `higgs` — short
-- `hf` — shortest (the curl `install.sh` skips it when Hugging Face's `hf` is already on `$PATH`; Homebrew and npm always install it)
+- `hf` — shortest (the curl `install.sh` skips it when another `hf` is already on `$PATH`; Homebrew and npm always install it)
 
 ## Quickstart
 
@@ -306,7 +306,7 @@ rm -rf ~/.config/higgsfield
 
 **`Session expired` / `Not authenticated`** — tokens are short-lived. Re-run `hf auth login`.
 
-**`hf` collides with another tool** — most often Hugging Face's `hf` CLI. Use `higgsfield` or `higgs` instead, or reinstall via curl with `--no-hf`:
+**`hf` collides with another tool** — use `higgsfield` or `higgs` instead, or reinstall via curl with `--no-hf`:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/higgsfield-ai/cli/main/install.sh | sh -s -- --no-hf
