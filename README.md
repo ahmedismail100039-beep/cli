@@ -1,72 +1,328 @@
 # Higgsfield CLI
 
 [![release](https://img.shields.io/github/v/release/higgsfield-ai/cli?style=flat-square)](https://github.com/higgsfield-ai/cli/releases)
+[![npm](https://img.shields.io/npm/v/@higgsfield/cli?style=flat-square)](https://www.npmjs.com/package/@higgsfield/cli)
 [![license](https://img.shields.io/github/license/higgsfield-ai/cli?style=flat-square)](./LICENSE)
 
-Higgsfield CLI is a command-line tool for the [Higgsfield AI](https://higgsfield.ai) platform. Generate images and videos with 35+ models (Nano Banana, Soul, Veo, Kling, Seedance, Flux), train Soul Characters, and produce branded marketing assets — all from your terminal.
+Generate images and videos from the terminal using 34 [Higgsfield AI](https://higgsfield.ai) models — Nano Banana Pro, FLUX.2, Soul V2, Veo 3.1, Kling v3.0, Seedance 2.0, Marketing Studio, and more. Train face-faithful Soul characters and produce branded marketing assets without leaving your shell.
 
-<img src="./demo.png" />
+![Higgsfield CLI demo](./demo.png)
 
-## Get started
+## Contents
 
-1. Install the CLI:
+- [Install](#install)
+- [Quickstart](#quickstart)
+- [Examples](#examples)
+- [Models](#models)
+- [Commands](#commands)
+- [Scripting](#scripting)
+- [Updating](#updating)
+- [Uninstall](#uninstall)
+- [Troubleshooting](#troubleshooting)
+- [Support](#support)
+- [License](#license)
 
-    **macOS / Linux (Recommended):**
-    ```bash
-    curl -fsSL https://raw.githubusercontent.com/higgsfield-ai/cli/main/install.sh | sh
-    ```
+## Install
 
-    **Homebrew (macOS / Linux):**
-    ```bash
-    brew install higgsfield-ai/tap/higgsfield
-    ```
+### macOS / Linux — curl
 
-    **Manual download:**
-    See [Releases](https://github.com/higgsfield-ai/cli/releases). Pick the archive matching your OS and architecture, extract, and place the binary in your `$PATH`.
+```bash
+curl -fsSL https://raw.githubusercontent.com/higgsfield-ai/cli/main/install.sh | sh
+```
 
-2. Authenticate:
-    ```bash
-    higgsfield auth login
-    ```
+### macOS / Linux — Homebrew
 
-3. Generate something:
-    ```bash
-    higgsfield generate create nano_banana_2 --prompt "a fox in a snowy pine forest"
-    ```
+```bash
+brew install higgsfield-ai/tap/higgsfield
+```
 
-    Pass a local image as reference — CLI auto-uploads:
-    ```bash
-    higgsfield generate create nano_banana_2 --prompt "stylize as anime" --image ./photo.png
-    higgsfield generate create kling3_0 --prompt "slow push-in" --start-image ./first.png --end-image ./last.png
-    ```
+### Cross-platform (incl. Windows) — npm
 
-    Media flags (`--image`, `--start-image`, `--end-image`, `--video`, `--audio`) accept either a UUID (upload id or previous job id) or a local file path.
+```bash
+npm install -g @higgsfield/cli
+```
 
-The CLI is also available as `higgs` and `hf` (when not in conflict with other tools).
+### Manual
 
-## What it does
+Download an archive matching your OS and architecture from [Releases](https://github.com/higgsfield-ai/cli/releases), extract, and place the binary in your `$PATH`.
 
-- **Auth** — `higgsfield auth login`, device-code flow
-- **Generate** — text-to-image, image-to-image, image-to-video, reference-based
-- **Soul** — train a face-faithful identity model, reuse across generations
-- **Marketing Studio** — branded ads with avatars, products, UGC modes
-- **Workspace** — switch between team workspaces, see balance and history
+After install, the CLI is available as three names:
 
-Run `higgsfield` for the full list, or `higgsfield <command> --help` for any subcommand.
+- `higgsfield` — canonical
+- `higgs` — short
+- `hf` — shortest (the curl `install.sh` skips it when Hugging Face's `hf` is already on `$PATH`; Homebrew and npm always install it)
+
+## Quickstart
+
+Authenticate (opens browser, device-code flow):
+
+```bash
+hf auth login
+```
+
+Generate one image:
+
+```bash
+hf gen create nano_banana_2 --prompt "a fox in a snowy pine forest"
+```
+
+Block until the job finishes and print the result URL:
+
+```bash
+hf gen create nano_banana_2 --prompt "..." --wait
+```
+
+Pass a local image as reference — the CLI auto-uploads it:
+
+```bash
+hf gen create flux_kontext --prompt "stylize as anime" --image ./photo.png --wait
+```
+
+Media flags (`--image`, `--start-image`, `--end-image`, `--video`, `--audio`) accept either a UUID (an upload id or a previous job id) or a local file path.
+
+## Examples
+
+### Text → image (Nano Banana Pro)
+
+```bash
+hf gen create nano_banana_2 \
+  --prompt "studio product photo, soft window light" \
+  --aspect_ratio 16:9 \
+  --resolution 2k \
+  --wait
+```
+
+### Image edit / restyle (Flux Kontext)
+
+```bash
+hf gen create flux_kontext \
+  --prompt "convert to watercolor" \
+  --image ./input.png \
+  --wait
+```
+
+### Image → video (Kling v3.0)
+
+```bash
+hf gen create kling3_0 \
+  --prompt "slow push-in shot" \
+  --start-image ./first.png \
+  --duration 5 --mode pro \
+  --wait
+```
+
+### Cinematic video (Google Veo 3.1)
+
+```bash
+hf gen create veo3_1 \
+  --prompt "drone over a misty mountain valley at dawn" \
+  --aspect_ratio 16:9 --duration 8 --quality high \
+  --wait
+```
+
+### Identity-faithful image (Soul V2)
+
+Train a Soul character once:
+
+```bash
+hf soul create --name me --soul-2 \
+  --image ./me1.jpg --image ./me2.jpg --image ./me3.jpg
+hf soul wait <soul_id>
+```
+
+Reuse the trained Soul in any compatible image model:
+
+```bash
+hf gen create text2image_soul_v2 \
+  --prompt "cinematic close-up portrait, golden hour" \
+  --custom_reference_id <soul_id> \
+  --wait
+```
+
+### Branded ad image (Marketing Studio)
+
+```bash
+hf gen create marketing_studio_image \
+  --prompt "product on marble countertop, soft daylight" \
+  --image ./product.png \
+  --resolution 4k \
+  --wait
+```
+
+### Pipe a prompt from stdin
+
+```bash
+echo "a fox in a snowy pine forest" | hf gen create nano_banana_2 --wait
+```
+
+## Models
+
+34 image and video models. The list below is grouped; use `hf model list` for the live catalog and `hf model get <job_set_type>` for the full parameter schema (required fields, defaults, enums).
+
+### Image (18)
+
+| job_set_type | name |
+|---|---|
+| `nano_banana_2` | Nano Banana Pro |
+| `nano_banana_flash` | Nano Banana 2 |
+| `nano_banana` | Nano Banana |
+| `flux_2` | FLUX.2 |
+| `flux_kontext` | Flux Kontext |
+| `gpt_image_2` | GPT Image 2 |
+| `text2image_soul_v2` | Higgsfield Soul V2 |
+| `seedream_v4_5` | Seedream 4.5 |
+| `seedream_v5_lite` | Seedream V5 Lite |
+| `grok_image` | Grok Image |
+| `openai_hazel` | OpenAI Hazel |
+| `image_auto` | Image Auto |
+| `z_image` | Z Image |
+| `kling_omni_image` | Kling O1 Image |
+| `cinematic_studio_2_5` | Cinematic Studio 2.5 |
+| `soul_cinematic` | Soul Cinematic |
+| `soul_location` | Soul Location |
+| `marketing_studio_image` | Marketing Studio Image |
+
+### Video (16)
+
+| job_set_type | name |
+|---|---|
+| `veo3_1` | Google Veo 3.1 |
+| `veo3_1_lite` | Google Veo 3.1 Lite |
+| `veo3` | Google Veo 3 |
+| `kling3_0` | Kling v3.0 |
+| `kling2_6` | Kling 2.6 Video |
+| `seedance_2_0` | Seedance 2.0 |
+| `seedance1_5` | Seedance 1.5 Pro |
+| `wan2_7` | Wan 2.7 |
+| `wan2_6` | Wan 2.6 Video |
+| `minimax_hailuo` | Minimax Hailuo |
+| `grok_video` | Grok Video |
+| `cinematic_studio_3_0` | Cinematic Studio 3.0 |
+| `cinematic_studio_video` | Cinematic Studio Video |
+| `cinematic_studio_video_v2` | Cinematic Studio Video V2 |
+| `soul_cast` | Soul Cast |
+| `marketing_studio_video` | Marketing Studio Video |
+
+Per-model parameters, defaults, and enums: `hf model get <job_set_type>`.
+
+## Commands
+
+| Command | Purpose |
+|---|---|
+| `hf auth` | login / logout / inspect token |
+| `hf account` | credits balance, transactions |
+| `hf workspace` | list / select / unset billing workspace |
+| `hf model` | list models, inspect parameter schema |
+| `hf gen` (alias `generate`) | create / cost / wait / get / list jobs |
+| `hf upload` | upload an image / video / audio file |
+| `hf soul` | train and manage Soul characters |
+| `hf marketing-studio` (alias `ms`) | branded ads with avatars and products |
+| `hf product-photoshoot` | brand image generation with mode-specific enhancement |
+| `hf version` | print build info |
+
+Run `hf <command> --help` for flags and examples (also `hf gen create --help`, `hf soul create --help`, etc.).
+
+## Scripting
+
+### JSON output
+
+Every command accepts `--json` for machine-readable output (good for `jq` pipelines):
+
+```bash
+hf gen list --json | jq -r '.[] | select(.status=="completed") | .result_url'
+```
+
+### Block until done
+
+```bash
+hf gen create kling3_0 --prompt "..." --start-image ./a.png --wait --json \
+  | jq -r '.[0].result_url'
+```
+
+Tunables: `--wait-timeout 20m` (default `10m`), `--wait-interval 5s` (default `3s`).
+
+### Shell completion
+
+```bash
+hf completion zsh   > "${fpath[1]}/_hf"
+hf completion bash  > /etc/bash_completion.d/hf
+hf completion fish  > ~/.config/fish/completions/hf.fish
+hf completion powershell | Out-String | Invoke-Expression  # current session
+```
+
+### Environment variables
+
+| Variable | Purpose |
+|---|---|
+| `HIGGSFIELD_API_URL` | API endpoint (default: production) |
+| `HIGGSFIELD_DEVICE_AUTH_URL` | Device-flow auth endpoint |
+| `HIGGSFIELD_CREDENTIALS_PATH` | Token file path (default `~/.config/higgsfield/credentials.json`) |
+
+### Exit codes
+
+`0` success · `1` generic · `2` auth · `3` API · `4` user input.
 
 ## Updating
 
 ```bash
-# install.sh path
+# curl
 curl -fsSL https://raw.githubusercontent.com/higgsfield-ai/cli/main/install.sh | sh
 
-# brew path
+# brew
 brew update && brew upgrade higgsfield
+
+# npm
+npm install -g @higgsfield/cli@latest
 ```
 
-## Reporting bugs
+Pin to a specific release:
 
-File an issue at [github.com/higgsfield-ai/cli/issues](https://github.com/higgsfield-ai/cli/issues).
+```bash
+curl -fsSL https://raw.githubusercontent.com/higgsfield-ai/cli/main/install.sh | sh -s -- --tag v0.1.22
+# or
+npm install -g @higgsfield/cli@0.1.22
+```
+
+## Uninstall
+
+```bash
+# curl install (default prefix /usr/local)
+sudo rm /usr/local/bin/higgsfield /usr/local/bin/higgs /usr/local/bin/hf
+
+# brew
+brew uninstall higgsfield
+
+# npm
+npm uninstall -g @higgsfield/cli
+```
+
+Remove stored credentials:
+
+```bash
+rm -rf ~/.config/higgsfield
+```
+
+## Troubleshooting
+
+**`Session expired` / `Not authenticated`** — tokens are short-lived. Re-run `hf auth login`.
+
+**`hf` collides with another tool** — most often Hugging Face's `hf` CLI. Use `higgsfield` or `higgs` instead, or reinstall via curl with `--no-hf`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/higgsfield-ai/cli/main/install.sh | sh -s -- --no-hf
+```
+
+**Behind a corporate proxy** — set `HTTPS_PROXY` / `HTTP_PROXY` and re-run.
+
+**Where is the token stored?** — `~/.config/higgsfield/credentials.json` (mode `600`). Override with `HIGGSFIELD_CREDENTIALS_PATH`.
+
+**`Unknown model "<name>"`** — run `hf model list` for the current catalog; model names occasionally change.
+
+## Support
+
+Bugs and feature requests: [github.com/higgsfield-ai/cli/issues](https://github.com/higgsfield-ai/cli/issues). Please include `hf version` output and the exact command that failed.
+
+Platform: [higgsfield.ai](https://higgsfield.ai)
 
 ## License
 
