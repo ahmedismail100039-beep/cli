@@ -119,9 +119,9 @@ higgsfield generate create veo3_1 \
 Train a Soul character once:
 
 ```bash
-higgsfield soul create --name me --soul-2 \
+higgsfield soul-id create --name me --soul-2 \
   --image ./me1.jpg --image ./me2.jpg --image ./me3.jpg
-higgsfield soul wait <soul_id>
+higgsfield soul-id wait <soul_id>
 ```
 
 Reuse the trained Soul in any compatible image model:
@@ -129,7 +129,7 @@ Reuse the trained Soul in any compatible image model:
 ```bash
 higgsfield generate create text2image_soul_v2 \
   --prompt "cinematic close-up portrait, golden hour" \
-  --custom_reference_id <soul_id> \
+  --soul-id <soul_id> \
   --wait
 ```
 
@@ -203,12 +203,12 @@ Per-model parameters, defaults, and enums: `higgsfield model get <job_set_type>`
 | `higgsfield model` | list models, inspect parameter schema |
 | `higgsfield generate` | create / cost / wait / get / list jobs |
 | `higgsfield upload` | upload an image / video / audio file |
-| `higgsfield soul` | train and manage Soul characters |
+| `higgsfield soul-id` | train and manage Soul characters |
 | `higgsfield marketing-studio` | branded ads with avatars and products |
 | `higgsfield product-photoshoot` | brand image generation with mode-specific enhancement |
 | `higgsfield version` | print build info |
 
-Run `higgsfield <command> --help` for flags and examples (also `higgsfield generate create --help`, `higgsfield soul create --help`, etc.).
+Run `higgsfield <command> --help` for flags and examples (also `higgsfield generate create --help`, `higgsfield soul-id create --help`, etc.).
 
 ## Scripting
 
