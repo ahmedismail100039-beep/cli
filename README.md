@@ -246,7 +246,7 @@ npm uninstall -g @higgsfield/cli
 
 **`Session expired` / `Not authenticated`** — tokens are short-lived. Re-run `higgsfield auth login`.
 
-**`Unknown model "<name>"`** — run `higgsfield model list` for the current catalog; model names occasionally change.
+**`Unknown model "<name>"`** — run `higgsfield model list` for the current catalog.
 
 ## Support
 
