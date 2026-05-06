@@ -225,6 +225,7 @@ The `--prompt` flag is required by every model. Media inputs (`--image`, `--star
 | `--start-image`, `--end-image`, `--image`, `--video`, `--audio` | false | — | UUID or path |
 | `--mode` | false | `std` | `pro`, `std` |
 | `--prompt` | true | — | string |
+| `--sound` | false | `on` | `on`, `off` |
 
 ### marketing_studio_video — Marketing Studio Video
 

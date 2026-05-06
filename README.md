@@ -88,7 +88,7 @@ higgsfield generate create gpt_image_2 \
 higgsfield generate create kling3_0 \
   --prompt "slow camera push through a forest clearing at dawn" \
   --start-image ./first.png \
-  --duration 5 --mode pro \
+  --duration 5 --mode pro --sound off \
   --wait
 ```
 
