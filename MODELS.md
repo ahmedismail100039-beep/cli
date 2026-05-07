@@ -231,15 +231,18 @@ The `--prompt` flag is required by every model. Media inputs (`--image`, `--star
 
 | flag | required | default | values |
 |---|---|---|---|
+| `--ad_reference_id` | false | — | object (ad-reference UUID) |
 | `--aspect_ratio` | false | `16:9` | `auto`, `21:9`, `16:9`, `4:3`, `1:1`, `3:4`, `9:16` |
 | `--avatars` | false | — | array |
 | `--duration` | false | `15` | integer |
 | `--generate_audio` | false | `false` | boolean |
+| `--hook_id` | false | — | object (hook UUID) |
 | `--start-image`, `--end-image`, `--image`, `--video`, `--audio` | false | — | UUID or path |
-| `--mode` | false | `ugc` | `ugc`, `tutorial`, `ugc_unboxing`, `hyper_motion`, `product_review`, `tv_spot`, `wild_card`, `ugc_virtual_try_on`, `virtual_try_on` |
+| `--mode` | false | `ugc` | `ugc`, `ugc_how_to`, `ugc_unboxing`, `product_showcase`, `product_review`, `tv_spot`, `wild_card`, `ugc_virtual_try_on`, `virtual_try_on` |
 | `--product_ids` | false | — | array |
 | `--prompt` | true | — | string |
-| `--resolution` | false | `720p` | `480p`, `720p` |
+| `--resolution` | false | `720p` | `480p`, `720p`, `1080p` |
+| `--setting_id` | false | — | object (setting UUID) |
 | `--web_product_ids` | false | — | array |
 
 ### minimax_hailuo — Minimax Hailuo

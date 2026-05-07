@@ -180,7 +180,7 @@ higgsfield generate create text2image_soul_v2 \
 | `higgsfield generate` | create / cost / wait / get / list jobs |
 | `higgsfield upload` | upload an image / video / audio file |
 | `higgsfield soul-id` | train and manage Soul characters |
-| `higgsfield marketing-studio` | branded ads with avatars and products |
+| `higgsfield marketing-studio` | branded ads with avatars, products, and ad references |
 | `higgsfield product-photoshoot` | brand image generation with mode-specific enhancement |
 | `higgsfield version` | print build info |
 
