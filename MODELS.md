@@ -71,6 +71,19 @@ The `--prompt` flag is required by every model. Media inputs (`--image`, `--star
 | `--prompt` | true | — | string |
 | `--resolution` | false | `1k` | `1k`, `2k` |
 
+### dtc_ads — DTC Ads Engine
+
+| flag | required | default | values |
+|---|---|---|---|
+| `--aspect_ratio` | false | `1:1` | `auto`, `1:1`, `3:2`, `2:3`, `4:3`, `3:4`, `9:16`, `16:9`, `21:9`, `27:16`, `16:27`, `9:8`, `8:9`, `4:9`, `9:4` |
+| `--batch_size` | false | `1` | integer (1..20) |
+| `--brand_kit_id` | false | — | brand kit UUID |
+| `--folder_id` | false | — | folder UUID |
+| `--prompt` | true | — | string |
+| `--quality` | false | `low` | `low`, `medium`, `high` |
+| `--resolution` | false | `1k` | `1k`, `2k`, `4k` |
+| `--style_id` | true | — | ad format UUID (from `marketing-studio ad-formats list`) |
+
 ### marketing_studio_image — Marketing Studio Image
 
 | flag | required | default | values |
