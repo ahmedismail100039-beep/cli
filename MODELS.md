@@ -105,7 +105,7 @@ The `--prompt` flag is required by every model. Media inputs (`--image`, `--star
 
 | flag | required | default | values |
 |---|---|---|---|
-| `--aspect_ratio` | false | `1:1` | `auto`, `1:1`, `3:2`, `2:3`, `4:3`, `3:4`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9` |
+| `--aspect_ratio` | false | `1:1` | `1:1`, `3:2`, `2:3`, `4:3`, `3:4`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9` |
 | `--image` (1+) | false | — | UUID or path |
 | `--prompt` | true | — | string |
 | `--resolution` | false | `1k` | `1k`, `2k`, `4k` |
