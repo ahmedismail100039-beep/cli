@@ -5,7 +5,7 @@ Generated from `higgsfield model list` and `higgsfield model get <job_set_type>`
 The `--prompt` flag is required by every model. Media inputs (`--image`, `--start-image`, `--end-image`, `--video`, `--audio`) accept either a UUID (upload id or previous job id) or a local file path; paths are auto-uploaded.
 
 
-## Image (18)
+## Image (19)
 
 ### cinematic_studio_2_5 — Cinematic Studio 2.5
 
@@ -127,6 +127,24 @@ The `--prompt` flag is required by every model. Media inputs (`--image`, `--star
 | `--image` (1+) | false | — | UUID or path |
 | `--prompt` | true | — | string |
 | `--quality` | false | `medium` | `low`, `medium`, `high` |
+
+### recraft_v4_1 — Recraft V4.1
+
+| flag | required | default | values |
+|---|---|---|---|
+| `--aspect_ratio` | false | `1:1` | `1:1`, `3:4`, `4:3`, `4:5`, `5:4`, `3:2`, `2:3`, `16:9`, `9:16`, `21:9` |
+| `--background_color` | false | — | string |
+| `--batch_size` | false | `1` | integer (1..4) |
+| `--colors` | false | — | array |
+| `--model_type` | false | `standard` | `standard`, `vector`, `utility`, `utility_vector` |
+| `--prompt` | true | — | string |
+| `--resolution` | false | `1k` | `1k`, `2k` |
+
+Example:
+
+```bash
+higgsfield generate create recraft_v4_1 --prompt "minimal vector logo mark for a coffee brand" --model_type vector --resolution 2k --wait
+```
 
 ### seedream_v4_5 — Seedream 4.5
 
