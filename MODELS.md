@@ -422,3 +422,33 @@ higgsfield generate create video_background_remover --video ./video.mp4 --wait
 | `--start-image`, `--end-image`, `--image`, `--video`, `--audio` | false | — | UUID or path |
 | `--prompt` | true | — | string |
 | `--resolution` | false | `720p` | `720p`, `1080p` |
+
+## 3D (1)
+
+### multi_image_to_3d — Multi-Image to 3D
+
+| flag | required | default | values |
+|---|---|---|---|
+| `--animation_action_id` | false | — | integer |
+| `--enable_animation` | false | `false` | boolean |
+| `--enable_pbr` | false | — | boolean |
+| `--enable_rigging` | false | `false` | boolean |
+| `--enable_safety_checker` | false | — | boolean |
+| `--folder_id` | false | — | UUID |
+| `--image` (1..4) | true | — | UUID or path |
+| `--pose_mode` | false | — | string |
+| `--rigging_height_meters` | false | — | number |
+| `--seed` | false | — | integer |
+| `--should_remesh` | false | — | boolean |
+| `--should_texture` | false | `false` | boolean |
+| `--symmetry_mode` | false | — | string |
+| `--target_polycount` | false | — | integer |
+| `--texture_image_url` | false | — | string |
+| `--texture_prompt` | false | — | string |
+| `--topology` | false | — | string |
+
+Example:
+
+```bash
+higgsfield generate create multi_image_to_3d --image ./front.png --image ./side.png --should_texture true --wait
+```

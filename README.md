@@ -4,7 +4,7 @@
 [![npm](https://img.shields.io/npm/v/@higgsfield/cli?style=flat-square)](https://www.npmjs.com/package/@higgsfield/cli)
 [![license](https://img.shields.io/github/license/higgsfield-ai/cli?style=flat-square)](./LICENSE)
 
-Generate images, videos, and finished-video analysis from the terminal using 30+ [Higgsfield AI](https://higgsfield.ai) models — Nano Banana Pro, FLUX.2, Soul V2, Veo 3.1, Kling v3.0, Seedance 2.0, Marketing Studio, Virality Predictor, and more. Train face-faithful Soul characters and produce branded marketing assets without leaving your shell.
+Generate images, videos, 3D assets, and finished-video analysis from the terminal using 30+ [Higgsfield AI](https://higgsfield.ai) models — Nano Banana Pro, FLUX.2, Soul V2, Veo 3.1, Kling v3.0, Seedance 2.0, Marketing Studio, Virality Predictor, and more. Train face-faithful Soul characters and produce branded marketing assets without leaving your shell.
 
 ![Higgsfield CLI demo](./demo.png)
 
@@ -161,7 +161,7 @@ higgsfield generate create text2image_soul_v2 \
 
 ## Models
 
-30+ image and video models. Per-model parameters, defaults, and enums: [MODELS.md](./MODELS.md). Live catalog: `higgsfield model list`.
+30+ image, video, and 3D models. Per-model parameters, defaults, and enums: [MODELS.md](./MODELS.md). Live catalog: `higgsfield model list`.
 
 ### Image (21)
 
@@ -212,6 +212,12 @@ higgsfield generate create text2image_soul_v2 \
 | `soul_cast` | Soul Cast |
 | `marketing_studio_video` | Marketing Studio Video |
 | `video_background_remover` | Video Background Remover |
+
+### 3D (1)
+
+| job_set_type | name |
+|---|---|
+| `multi_image_to_3d` | Multi-Image to 3D |
 
 ## Workflows
 
