@@ -5,7 +5,7 @@ Generated from `higgsfield model list` and `higgsfield model get <job_set_type>`
 Required flags are listed per model below. Media inputs (`--image`, `--start-image`, `--end-image`, `--video`, `--audio`) accept either a UUID (upload id or previous job id) or a local file path; paths are auto-uploaded.
 
 
-## Image (20)
+## Image (21)
 
 ### cinematic_studio_2_5 — Cinematic Studio 2.5
 
@@ -139,6 +139,19 @@ higgsfield generate create image_background_remover --image ./image.png --wait
 | `--image` (1+) | false | — | UUID or path |
 | `--prompt` | true | — | string |
 | `--quality` | false | `medium` | `low`, `medium`, `high` |
+
+### outpaint — Outpaint
+
+| flag | required | default | values |
+|---|---|---|---|
+| `--aspect_ratio` | false | `21:9` | `auto`, `1:1`, `3:2`, `2:3`, `4:3`, `3:4`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9` |
+| `--image` (single) | true | — | UUID or path |
+
+Example:
+
+```bash
+higgsfield generate create outpaint --image ./image.png --aspect_ratio 16:9 --wait
+```
 
 ### recraft_v4_1 — Recraft V4.1
 
