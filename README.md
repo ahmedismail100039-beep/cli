@@ -99,7 +99,7 @@ higgsfield generate create kling3_0 \
 higgsfield generate create seedance_2_0 \
   --prompt "drone shot over a mountain valley at sunrise" \
   --aspect_ratio 16:9 --duration 5 \
-  --resolution 1080p --mode std --bitrate_mode high --genre noir \
+  --resolution 4k --mode std --bitrate_mode high --genre noir \
   --wait
 ```
 

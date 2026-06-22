@@ -369,7 +369,7 @@ higgsfield generate create kling3_0_turbo --prompt "fast handheld product reveal
 | `--start-image`, `--end-image`, `--image`, `--video`, `--audio` | false | — | UUID or path |
 | `--mode` | false | `std` | `std`, `fast` |
 | `--prompt` | true | — | string |
-| `--resolution` | false | `720p` | `480p`, `720p`, `1080p` |
+| `--resolution` | false | `720p` | `480p`, `720p`, `1080p`, `4k` |
 
 ### soul_cast — Soul Cast
 
